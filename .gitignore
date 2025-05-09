@@ -7,6 +7,7 @@ target/
 /src/main/frontend/node_modules/
 /src/main/resources/storage/**
 /src/main/resources/static/public/**
+/src/main/resources/application.properties
 
 ### STS ###
 .apt_generated

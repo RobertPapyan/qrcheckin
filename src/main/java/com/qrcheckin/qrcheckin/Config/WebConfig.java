@@ -3,7 +3,9 @@ package com.qrcheckin.qrcheckin.Config;
 import com.qrcheckin.qrcheckin.Interceptors.AuthRedirectInterceptor;
 import com.qrcheckin.qrcheckin.Interceptors.AuthUserInterceptor;
 import com.qrcheckin.qrcheckin.Interceptors.PaginationInterceptor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -34,5 +36,10 @@ public class WebConfig implements WebMvcConfigurer {
 
         registry.addInterceptor(authRedirectInterceptor)
                 .addPathPatterns("/login","/auth/**");
+    }
+
+    @Bean
+    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        return new HiddenHttpMethodFilter();
     }
 }

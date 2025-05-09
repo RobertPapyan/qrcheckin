@@ -19,4 +19,8 @@ public class AppConfig {
     public String getPublicPath(){
         return this.getPath() + "/src/main/resources/static/public";
     }
+
+    public String getStoragePath(){
+        return this.getPath() + "/src/main/resources/storage";
+    }
 }

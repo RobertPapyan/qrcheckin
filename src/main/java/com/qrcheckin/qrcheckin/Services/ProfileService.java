@@ -70,10 +70,12 @@ public class ProfileService {
                     image.transferTo(new File(config.getPublicPath() + "/images/" + image_path));
                     user.setImage(image_path);
                 } catch (IOException e) {
-                    throw new DashboardException(
-                            request.getEmail() + " : users image failed to upload" + "\n" + e.getMessage(),
+                    var dashboardException  = new DashboardException(
+                            request.getEmail() + " : users image failed to upload",
                             "Failed to upload image"
                     );
+                    dashboardException.initCause(e);
+                    throw dashboardException;
                 }
             }
         }

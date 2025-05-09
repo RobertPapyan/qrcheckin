@@ -36,6 +36,7 @@
                                     <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase ">Name</th>
                                     <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase ">Email</th>
                                     <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase ">Group</th>
+                                    <th scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200">
@@ -44,6 +45,14 @@
                                     <td th:text="${student.name}" class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"></td>
                                     <td th:text="${student.email}" class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"></td>
                                     <td th:text="${student.displayGroups()}" class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"></td>
+                                    <td>
+                                        <form th:action="@{'/dashboard/students/' + ${student.id}}" method="post">
+                                            <input type="hidden" name="_method" value="delete" />
+                                            <button type="submit" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 focus:outline-hidden focus:text-blue-800 disabled:opacity-50 disabled:pointer-events-none">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
