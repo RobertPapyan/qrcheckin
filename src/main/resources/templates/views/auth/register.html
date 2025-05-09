@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/guest_layout}">
+<body>
+<main layout:fragment="content" class="flex gap-2 justify-center max-w-2xl mx-auto ">
+    <form th:action="@{/auth/register}" th:object="${registerRequest}" method="post" enctype="multipart/form-data" class="p-6 min-w-80 bg-white border border-gray-200 shadow-2xs rounded-xl overflow-hidden hover:shadow-lg focus:outline-hidden focus:shadow-lg transition">
+        <h1 class="text-center text-lg font-semibold text-slate-600">Register</h1>
+
+
+
+        <!-- Name and Surname -->
+        <div class="flex gap-2 mt-4">
+            <div class="max-w-sm my-2 w-full">
+                <label class="block text-sm font-medium mb-2">Name</label>
+                <input type="text" th:field="*{name}" placeholder="John"
+                       class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500"/>
+                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-red-600 text-sm mt-1"></p>
+            </div>
+            <div class="max-w-sm my-2 w-full">
+                <label class="block text-sm font-medium mb-2">Surname</label>
+                <input type="text" th:field="*{surname}" placeholder="Smith"
+                       class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500"/>
+                <p th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="text-red-600 text-sm mt-1"></p>
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="max-w-sm my-2">
+            <label class="block text-sm font-medium mb-2">Email</label>
+            <input type="email" th:field="*{email}" placeholder="example@gmail.com"
+                   class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500"/>
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-red-600 text-sm mt-1"></p>
+        </div>
+
+        <!-- Password -->
+        <div class="max-w-sm my-2">
+            <label class="block text-sm font-medium mb-2">Password</label>
+            <input type="password" th:field="*{password}" placeholder="Your password here"
+                   class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500"/>
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-red-600 text-sm mt-1"></p>
+        </div>
+
+        <!-- Password Repeat -->
+        <div class="max-w-sm my-2">
+            <input type="password" th:field="*{password_repeat}" placeholder="Repeat password here"
+                   class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500"/>
+            <p th:if="${#fields.hasErrors('password_repeat')}" th:errors="*{password_repeat}" class="text-red-600 text-sm mt-1"></p>
+        </div>
+
+        <div th:if="${#fields.hasGlobalErrors()}" class="text-red-600 text-sm mb-2">
+            <ul>
+                <li th:each="err : ${#fields.globalErrors()}" th:text="${err}"></li>
+            </ul>
+        </div>
+
+        <!-- Image Upload -->
+        <div class="max-w-sm my-2">
+            <label for="file-input" class="block text-sm font-medium mb-2">Upload Profile Image</label>
+            <input type="file" th:field="*{image}" id="file-input" accept="image/*"
+                   class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 file:bg-gray-50 file:border-0 file:me-4 file:py-2 file:px-4"/>
+            <p th:if="${#fields.hasErrors('image')}" th:errors="*{image}" class="text-red-600 text-sm mt-1"></p>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex flex-col gap-2 mt-4">
+            <button type="submit"
+                    class="py-3 px-4 inline-flex items-center justify-center gap-x-2 text-sm text-center font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                Register
+            </button>
+            <span class="text-slate-600 text-sm text-center">
+            Already registered?
+            <a href="/login" class="text-slate-600 hover:text-slate-500 font-semibold">Login to your Account.</a>
+        </span>
+        </div>
+    </form>
+
+</main>
+</body>
+</html>

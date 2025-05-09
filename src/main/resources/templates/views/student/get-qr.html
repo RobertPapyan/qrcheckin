@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/guest_layout}">
+<body>
+<main layout:fragment="content" class="flex gap-2 justify-center max-w-lg mx-auto ">
+    <div class="flex flex-col flex-1 group bg-white border border-gray-200 shadow-2xs rounded-xl overflow-hidden hover:shadow-lg focus:outline-hidden focus:shadow-lg transition" href="#">
+        <div class="relative pt-[50%] sm:pt-[60%] lg:pt-[80%] rounded-t-xl overflow-hidden">
+            <img th:src="@{/assets/images/student.webp}" class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl" alt="Student Image">
+        </div>
+        <form th:action="@{/get-qr}" method="post" class="p-4 md:p-5">
+            <h3 class="sm:text-lg text-sm text-center font-bold text-gray-800 ">
+                Get Your QR code via email
+            </h3>
+            <div class="my-2">
+                <label for="email-input" class="block text-sm font-medium mb-2 ">Email</label>
+                <input
+                        type="email"
+                        id="email-input"
+                        name="email"
+                        placeholder="example@gmail.com"
+                        class="py-2.5 sm:py-3 px-4 block w-full border border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                >
+            </div>
+            <p class="mt-1 text-xs text-gray-500 ">
+                We will send your qr code to your email.
+            </p>
+            <button type="submit" id="get-button" disabled="disabled" class="mt-4 w-full py-3 px-4 inline-flex items-center justify-center gap-x-2 text-sm text-center font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                Get Qr
+            </button>
+            <script>
+                document.addEventListener("DOMContentLoaded", ()=>{
+                    const input  = document.querySelector("#email-input")
+                    const button = document.querySelector("#get-button")
+                    let timeout;
+
+                    if(!input || !button) return
+
+                    input.addEventListener("input", async (e)=>{
+                        button.disabled = true
+                        const email = e.target.value
+                        clearTimeout(timeout)
+                        if(!e.target.checkValidity() || email === '')return
+
+                        timeout = setTimeout(async ()=>{
+                            try {
+                                const response = await fetch(`/get-qr/student/exists?email=${encodeURIComponent(email)}`);
+
+                                if (!response.ok) throw new Error("Network error");
+
+                                const data = await response.json();
+
+                                button.disabled = !data.exists;
+
+                            } catch (error) {
+                                console.error("Error checking student:", error);
+                                button.disabled = true;
+                            }
+                        },1000)
+
+                    })
+
+                })
+            </script>
+        </form>
+    </div>
+</main>
+</body>
+</html>

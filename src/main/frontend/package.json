@@ -1,0 +1,18 @@
+{
+  "name": "qrcheckin_front",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./styles.css -o ../resources/static/assets/styles/main.css",
+    "watch": "tailwindcss --watch -i ./styles.css -o ../resources/static/assets/styles/main.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "@tailwindcss/forms": "^0.5.10"
+  }
+}

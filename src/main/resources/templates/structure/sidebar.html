@@ -1,0 +1,34 @@
+<div th:fragment="sidebar" class="h-full w-60 bg-white shadow-lg rounded-lg shrink-0 p-2">
+    <div class="p-2">
+        <h2 class="font-semibold text-sm">Dashboard Navigation</h2>
+
+    </div>
+    <ul class="flex-col space-y-1 my-2">
+        <li class="hover:bg-slate-100 rounded-md" th:classappend="${#strings.equals(request_uri,'/dashboard/profile')} ? 'bg-slate-200'">
+            <a th:href="@{/dashboard/profile}" class="flex items-center gap-2 p-2">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="16"  height="16"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
+                <span class="text-slate-600">Profile</span>
+            </a>
+        </li>
+        <li class="hover:bg-slate-100 rounded-md " th:classappend="(${#strings.equals(request_uri,'/dashboard/api-key')}) ? 'bg-slate-200' : ''">
+            <a th:href="@{/dashboard/api-key}" class="flex items-center gap-2 p-2">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="16"  height="16"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-key"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16.555 3.843l3.602 3.602a2.877 2.877 0 0 1 0 4.069l-2.643 2.643a2.877 2.877 0 0 1 -4.069 0l-.301 -.301l-6.558 6.558a2 2 0 0 1 -1.239 .578l-.175 .008h-1.172a1 1 0 0 1 -.993 -.883l-.007 -.117v-1.172a2 2 0 0 1 .467 -1.284l.119 -.13l.414 -.414h2v-2h2v-2l2.144 -2.144l-.301 -.301a2.877 2.877 0 0 1 0 -4.069l2.643 -2.643a2.877 2.877 0 0 1 4.069 0z" /><path d="M15 9h.01" /></svg>
+                <span class="text-slate-600 text-sm">My API key</span>
+            </a>
+        </li>
+        <li class="hover:bg-slate-100 rounded-md " th:classappend="(${#strings.equals(request_uri,'/dashboard/students')}) ? 'bg-slate-200' : ''">
+            <a th:href="@{/dashboard/students}" class="flex items-center gap-2 p-2">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="16"  height="16"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-users"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /><path d="M21 21v-2a4 4 0 0 0 -3 -3.85" /></svg>
+                <span class="text-slate-600 text-sm">My students</span>
+            </a>
+        </li>
+        <li class="hover:bg-slate-100 rounded-md " th:classappend="(${#strings.equals(request_uri,'/dashboard/classes')}) ? 'bg-slate-200' : ''">
+            <a th:href="@{/dashboard/groups}" class="flex items-center gap-2 p-2">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="16"  height="16"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="1"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-school"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" /><path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" /></svg>
+                <span class="text-slate-600 text-sm">My classes</span>
+            </a>
+        </li>
+
+    </ul>
+
+</div>
