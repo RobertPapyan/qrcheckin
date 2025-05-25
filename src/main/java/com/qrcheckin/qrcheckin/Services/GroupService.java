@@ -1,12 +1,9 @@
 package com.qrcheckin.qrcheckin.Services;
 
 import com.qrcheckin.qrcheckin.Models.Group;
-import com.qrcheckin.qrcheckin.Models.Student;
 import com.qrcheckin.qrcheckin.Models.User;
 import com.qrcheckin.qrcheckin.Repositories.GroupRepository;
-import com.qrcheckin.qrcheckin.Repositories.StudentRepository;
 import com.qrcheckin.qrcheckin.Requests.DashboardDataRequest;
-import com.qrcheckin.qrcheckin.Requests.StudentsDataRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

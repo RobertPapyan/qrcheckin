@@ -8,7 +8,7 @@ target/
 /src/main/resources/storage/**
 /src/main/resources/static/public/**
 /src/main/resources/application.properties
-
+/log/**
 ### STS ###
 .apt_generated
 .classpath

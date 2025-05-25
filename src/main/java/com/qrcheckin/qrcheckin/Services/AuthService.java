@@ -1,6 +1,7 @@
 package com.qrcheckin.qrcheckin.Services;
 
 import com.qrcheckin.qrcheckin.Config.AppConfig;
+import com.qrcheckin.qrcheckin.Exception.HomeException;
 import com.qrcheckin.qrcheckin.Helpers.Hasher;
 import com.qrcheckin.qrcheckin.Models.User;
 import com.qrcheckin.qrcheckin.Repositories.UserRepository;
@@ -45,7 +46,11 @@ public class AuthService {
                image.transferTo(new File(config.getPath() + "/src/main/resources/static/public/images/" + image_path));
 
            }catch (IOException e){
-               System.out.println(request.getEmail() + " : users image failed to upload");
+               throw new HomeException(
+                       request.getEmail() + " : users image failed to upload",
+                       "Failed to store image",
+                       e
+               );
            }
         }
 

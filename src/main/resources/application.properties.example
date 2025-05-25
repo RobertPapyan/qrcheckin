@@ -29,3 +29,4 @@ spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
 spring.mail.from=qr-checkin@gmail.com
 
+logging.file.name=log/main.log

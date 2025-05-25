@@ -10,7 +10,10 @@ public class UnauthenticatedApiCallException extends RuntimeException {
         super(message);
         this.request = request;
     }
-
+    public UnauthenticatedApiCallException(String message, HttpServletRequest request, Throwable cause) {
+        super(message, cause);
+        this.request = request;
+    }
     public HttpServletRequest getRequest() {
         return request;
     }

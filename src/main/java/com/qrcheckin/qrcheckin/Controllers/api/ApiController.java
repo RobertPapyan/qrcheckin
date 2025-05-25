@@ -6,7 +6,6 @@ import com.qrcheckin.qrcheckin.Exception.api.GroupNotFoundException;
 import com.qrcheckin.qrcheckin.Helpers.Hasher;
 import com.qrcheckin.qrcheckin.Models.Group;
 import com.qrcheckin.qrcheckin.Models.Student;
-import com.qrcheckin.qrcheckin.Models.User;
 import com.qrcheckin.qrcheckin.Records.api.ApiResponse;
 import com.qrcheckin.qrcheckin.Repositories.GroupRepository;
 import com.qrcheckin.qrcheckin.Repositories.StudentRepository;
@@ -18,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.function.EntityResponse;
 
 import java.io.File;
 import java.io.IOException;
@@ -97,9 +95,7 @@ public class ApiController {
             qr.transferTo(new File(config.getPath() + "/src/main/resources/storage/qr_codes/"  + image_path));
 
         }catch (IOException e){
-            var apiException = new ApiFailedException("Could not store " + request.getEmail() + " students qr");
-            apiException.initCause(e);
-            throw apiException;
+            throw new ApiFailedException("Could not store " + request.getEmail() + " students qr", e);
         }
 
         var newStudent = new Student(request.getName(),request.getEmail(),image_path);

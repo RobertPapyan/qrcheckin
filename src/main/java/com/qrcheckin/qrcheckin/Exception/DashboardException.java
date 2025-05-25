@@ -8,6 +8,11 @@ public class DashboardException extends RuntimeException {
     this.displayMessage = displayMessage;
   }
 
+  public DashboardException(String message, String displayMessage, Throwable cause){
+    super(message,cause);
+    this.displayMessage = displayMessage;
+  }
+
   public String getDisplayMessage() {
     return displayMessage;
   }

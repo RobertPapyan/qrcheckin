@@ -60,9 +60,8 @@ public class StudentsService {
                 Files.delete(file.toPath());
             } catch (IOException e) {
                 if( !(e instanceof NoSuchFileException)){
-                    var dashboardException = new DashboardException(student.getId() + " failed to delete","Failed to delete student.");
-                    dashboardException.initCause(e);
-                    throw dashboardException;
+                    throw new DashboardException(student.getId() + " failed to delete","Failed to delete student.",e);
+
                 }
             }
         }

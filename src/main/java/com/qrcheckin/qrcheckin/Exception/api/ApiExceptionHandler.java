@@ -1,6 +1,7 @@
 package com.qrcheckin.qrcheckin.Exception.api;
 
 import com.qrcheckin.qrcheckin.Records.api.ApiResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -12,13 +13,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @RestControllerAdvice( basePackages = "com.qrcheckin.qrcheckin.Controllers.api")
 public class ApiExceptionHandler {
     @ExceptionHandler(UnauthenticatedApiCallException.class)
     public ResponseEntity<ApiResponse> unauthenticatedApiHandler(UnauthenticatedApiCallException e){
 
-        //log this
+
         var request = e.getRequest();
+        log.info("Unauthenticated request from: {}", request.getRemoteAddr());
 
         var body = new ApiResponse(ApiResponse.ResponseStatuses.ERROR,"Api key not valid");
 
@@ -28,8 +31,8 @@ public class ApiExceptionHandler {
     @ExceptionHandler(ApiFailedException.class)
     public ResponseEntity<ApiResponse> unauthenticatedApiHandler(ApiFailedException e){
 
-        //log this
-        var p = e.getCause();
+        var cause = e.getCause();
+        log.error(e.getMessage());
 
         var body = new ApiResponse(ApiResponse.ResponseStatuses.ERROR,e.getMessage());
 

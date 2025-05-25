@@ -6,7 +6,6 @@ import com.qrcheckin.qrcheckin.Models.Student;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,7 @@ public class MailerService {
             File qrFile = new File(config.getPath() + "/src/main/resources/storage/qr_codes/" + student.getQr());
 
             if (!qrFile.exists()) {
-                throw new IllegalArgumentException("QR file does not exist: " + qrFile.getAbsolutePath());
+                throw new HomeException("QR file does not exist: " + qrFile.getAbsolutePath(),"Can not find your QR");
             }
 
             MimeMessage message = mailSender.createMimeMessage();
@@ -45,9 +44,7 @@ public class MailerService {
             mailSender.send(message);
 
         } catch (MessagingException  | IllegalArgumentException e) {
-            var homeException = new HomeException(e.getMessage(),"Failed to send your QR try later");
-            homeException.initCause(e);
-            throw homeException;
+            throw new HomeException(e.getMessage(),"Failed to send your QR try later", e);
         }
     }
 }

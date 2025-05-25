@@ -52,7 +52,11 @@ public class ProfileService {
                     Files.delete(currImage.toPath());
                     user.setImage(null);
                 } catch (IOException e) {
-                    System.out.println("Could not delete old profile image:" + e.getMessage());
+                    throw new DashboardException(
+                            currImage.getAbsolutePath() + " : failed do delete old image ",
+                            "Failed do delete old image",
+                            e
+                    );
                 }
 
             }
@@ -70,12 +74,11 @@ public class ProfileService {
                     image.transferTo(new File(config.getPublicPath() + "/images/" + image_path));
                     user.setImage(image_path);
                 } catch (IOException e) {
-                    var dashboardException  = new DashboardException(
+                    throw new DashboardException(
                             request.getEmail() + " : users image failed to upload",
-                            "Failed to upload image"
+                            "Failed to upload image",
+                            e
                     );
-                    dashboardException.initCause(e);
-                    throw dashboardException;
                 }
             }
         }
